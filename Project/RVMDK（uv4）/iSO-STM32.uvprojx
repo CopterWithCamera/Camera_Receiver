@@ -698,6 +698,21 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\nrf\bsp_spi_nrf.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_SysTick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\SysTick\bsp_SysTick.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Key\bsp_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Led\bsp_led.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1044,7 +1059,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER, STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\usart;..\..\User\nrf</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\usart;..\..\User\nrf;..\..\User\SysTick;..\..\User\Key;..\..\User\Led</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1406,6 +1421,21 @@
               <FileName>bsp_spi_nrf.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\nrf\bsp_spi_nrf.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_SysTick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\SysTick\bsp_SysTick.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Key\bsp_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Led\bsp_led.c</FilePath>
             </File>
           </Files>
         </Group>

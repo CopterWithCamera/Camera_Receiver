@@ -18,11 +18,13 @@
 #include "stm32f10x.h"
 #include "bsp_usart1.h"
 #include "bsp_spi_nrf.h"
+#include "bsp_SysTick.h"
+#include "bsp_exti.h"
+#include "bsp_led.h"  
 
 u8 status;		 //用于判断接收/发送状态
-u8 txbuf[RX_PLOAD_WIDTH];	 //发送缓冲
-u8 rxbuf[RX_PLOAD_WIDTH];	 //接收缓冲
-u8 i;
+u8 txbuf[32];	 //发送缓冲（直接用最大值）
+u8 rxbuf[32];	 //接收缓冲（直接用最大值）
 
  /**
   * @brief  主函数
@@ -30,7 +32,17 @@ u8 i;
   * @retval 无
   */
 int main(void)
-{      
+{
+	u8 i;
+	
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);	//配置中断优先级分组
+	
+	LED_GPIO_Config();	//LED初始化
+	
+	EXTI_PA0_Config();	//PA0外部中断初始化
+	EXTI_PC13_Config();	//PC13外部中断初始化
+	EXTI_PC1_Config();	//PC1外部中断初始化
+	
 	/* 串口1初始化 */
 	USART1_Config(); 
 
@@ -44,21 +56,26 @@ int main(void)
 
 	/*检测NRF模块与MCU的连接*/
 	status = NRF_Check();   		
-	if(status == SUCCESS)	   
-		printf("\r\n      NRF与MCU连接成功\r\n");  
+	if(status == SUCCESS)
+	{
+		printf("\r\n      NRF与MCU连接成功\r\n");
+	}
 	else
 	{
 		printf("\r\n   连接失败。。。\r\n");
 		while(1);
 	}
-		
 	
 	//进入接收模式
 	printf("\r\n 从机端 进入接收模式\r\n");
+	printf("\r\n NRF默认数据包长度32字节 \r\n");
+	printf("\r\n 两个灯：32字节 \r\n");
+	printf("\r\n 一个灯：4字节 \r\n");
+	printf("\r\n 用WK_UP和KEY1切换 \r\n");
 	NRF_RX_Mode();
 
 	while(1)
-	{  		 	
+	{
 		/*等待接收数据*/
 		status = NRF_Rx_Dat(rxbuf);	//每次读回来DATA_WIDTH个字节
 
@@ -73,6 +90,6 @@ int main(void)
 				while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);	
 			}
 		}
-	} 
+	}
 }
 /*********************************************END OF FILE**********************/

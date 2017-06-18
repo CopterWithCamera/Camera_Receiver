@@ -17,8 +17,11 @@
 #include "bsp_spi_nrf.h"
 #include "bsp_usart1.h"
 
-u8 RX_BUF[RX_PLOAD_WIDTH];		//接收数据缓存
-u8 TX_BUF[TX_PLOAD_WIDTH];		//发射数据缓存
+int RX_PLOAD_WIDTH = 32;	//用int型变量替换宏定义
+int TX_PLOAD_WIDTH = 32;
+
+//u8 RX_BUF[32];		//接收数据缓存
+//u8 TX_BUF[32];		//发射数据缓存
 u8 TX_ADDRESS[TX_ADR_WIDTH] = {0x34,0x43,0x10,0x10,0x01};  // 定义一个静态发送地址
 u8 RX_ADDRESS[RX_ADR_WIDTH] = {0x34,0x43,0x10,0x10,0x01}; 
 

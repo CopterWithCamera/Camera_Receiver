@@ -3,11 +3,14 @@
 
 #include "stm32f10x.h"
 
+extern int RX_PLOAD_WIDTH;	//用int型变量替换宏定义
+extern int TX_PLOAD_WIDTH;
+
 #define TX_ADR_WIDTH 	5  	//发射地址宽度
-#define TX_PLOAD_WIDTH  32   //发射数据通道有效数据宽度0~32Byte 
+//#define TX_PLOAD_WIDTH  32   //发射数据通道有效数据宽度0~32Byte 
 
 #define RX_ADR_WIDTH    5
-#define RX_PLOAD_WIDTH  32 
+//#define RX_PLOAD_WIDTH  32
 
 #define CHANAL 40	//频道选择 
 
