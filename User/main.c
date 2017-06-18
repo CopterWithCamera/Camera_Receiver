@@ -20,8 +20,8 @@
 #include "bsp_spi_nrf.h"
 
 u8 status;		 //用于判断接收/发送状态
-u8 txbuf[4];	 //发送缓冲
-u8 rxbuf[4];	 //接收缓冲
+u8 txbuf[RX_PLOAD_WIDTH];	 //发送缓冲
+u8 rxbuf[RX_PLOAD_WIDTH];	 //接收缓冲
 u8 i;
 
  /**
@@ -54,24 +54,23 @@ int main(void)
 		
 	
 	//进入接收模式
-	printf("\r\n 从机端 进入接收模式\r\n"); 
+	printf("\r\n 从机端 进入接收模式\r\n");
 	NRF_RX_Mode();
 
 	while(1)
 	{  		 	
 		/*等待接收数据*/
-		status = NRF_Rx_Dat(rxbuf);	//每次读回来4字节
+		status = NRF_Rx_Dat(rxbuf);	//每次读回来DATA_WIDTH个字节
 
 		/*判断接收状态*/
 		if(status == RX_DR)
 		{
-			for(i=0;i<4;i++)
+			for(i=0;i<RX_PLOAD_WIDTH;i++)
 			{	
 				//printf("\r\n 从机端 接收到 主机端 发送的数据为：%d \r\n",);
 				
 				USART_SendData(USART1, rxbuf[i]);
 				while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);	
-
 			}
 		}
 	} 
