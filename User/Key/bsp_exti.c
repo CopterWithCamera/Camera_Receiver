@@ -90,6 +90,11 @@ void EXTI_PA0_Config(void)
 	EXTI_Init(&EXTI_InitStructure); 
 }
 
+ /**
+  * @brief  配置 PC1 为线中断口，并设置中断优先级
+  * @param  无
+  * @retval 无
+  */
 void EXTI_PC1_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure; 

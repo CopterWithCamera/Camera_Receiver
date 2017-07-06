@@ -20,7 +20,7 @@
 #include "bsp_spi_nrf.h"
 #include "bsp_SysTick.h"
 #include "bsp_exti.h"
-#include "bsp_led.h"  
+#include "bsp_led.h"
 
 u8 status;		 //用于判断接收/发送状态
 u8 txbuf[32];	 //发送缓冲（直接用最大值）
@@ -37,11 +37,11 @@ int main(void)
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);	//配置中断优先级分组
 	
-	LED_GPIO_Config();	//LED初始化
+//	LED_GPIO_Config();	//LED初始化
 	
-	EXTI_PA0_Config();	//PA0外部中断初始化
-	EXTI_PC13_Config();	//PC13外部中断初始化
-	EXTI_PC1_Config();	//PC1外部中断初始化
+//	EXTI_PA0_Config();	//PA0外部中断初始化
+//	EXTI_PC13_Config();	//PC13外部中断初始化
+//	EXTI_PC1_Config();	//PC1外部中断初始化
 	
 	/* 串口1初始化 */
 	USART1_Config(); 
@@ -69,9 +69,9 @@ int main(void)
 	//进入接收模式
 	printf("\r\n 从机端 进入接收模式\r\n");
 	printf("\r\n NRF默认数据包长度32字节 \r\n");
-	printf("\r\n 两个灯：32字节 \r\n");
-	printf("\r\n 一个灯：4字节 \r\n");
-	printf("\r\n 用WK_UP和KEY1切换 \r\n");
+//	printf("\r\n 两个灯：32字节 \r\n");
+//	printf("\r\n 一个灯：4字节 \r\n");
+//	printf("\r\n 用WK_UP和KEY1切换 \r\n");
 	NRF_RX_Mode();
 
 	while(1)

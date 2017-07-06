@@ -43,7 +43,8 @@ void USART1_Config(void)
 		
 	/* USART1 mode config */
 	//USART_InitStructure.USART_BaudRate = 256000;
-	USART_InitStructure.USART_BaudRate = 460800;
+	//USART_InitStructure.USART_BaudRate = 460800;
+	USART_InitStructure.USART_BaudRate = 921600;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
 	USART_InitStructure.USART_Parity = USART_Parity_No ;

@@ -42,6 +42,7 @@ void SPI_NRF_Init(void)
 
 	/*开启相应IO端口的时钟*/
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
@@ -58,33 +59,60 @@ void SPI_NRF_Init(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用功能
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	
+	#ifdef BLACK_RCT6
+	
+		/*初始化CSN脚*/
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+		GPIO_Init(GPIOC, &GPIO_InitStructure);
+		
+		//辅助引脚
+		
+		/*初始化CE脚  PA4*/
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+		GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-	/*初始化CSN脚*/
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
+		/*配置SPI_NRF_SPI的IRQ引脚  PC5*/
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU ;  //上拉输入
+		GPIO_Init(GPIOC, &GPIO_InitStructure); 
 	
-	//****************************************************************************
+	#endif
 	
-	//辅助引脚
+	#ifdef RED_C8T6
 	
-	/*初始化CE脚  PA4*/
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+		/*配置SPI_NRF_SPI的 CSN 引脚*/
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+		GPIO_Init(GPIOA, &GPIO_InitStructure);
+		
+		/*CE*/
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+		GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-	/*配置SPI_NRF_SPI的IRQ引脚  PC5*/
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU ;  //上拉输入
-	GPIO_Init(GPIOC, &GPIO_InitStructure); 
+		/*配置SPI_NRF_SPI的IRQ引脚*/
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU ;  //上拉输入
+		GPIO_Init(GPIOB, &GPIO_InitStructure); 
+	
+	#endif
+	
+	
+	
 	
 	//****************************************************************************
 	  
 	/* 这是自定义的宏，用于拉高csn引脚，NRF进入空闲状态 */
-	NRF_CSN_HIGH(); 
+	NRF_CSN_HIGH();
 
 	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工
 	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;	 					//主模式
@@ -373,7 +401,7 @@ u8 NRF_Rx_Dat(u8 *rxbuf)
 	NRF_CE_HIGH();	 //进入接收状态
 	
 	/*等待接收中断*/
-	while(NRF_Read_IRQ()!=0); 
+	while(NRF_Read_IRQ()!=0);
 	
 	NRF_CE_LOW();  	 //进入待机状态
 	

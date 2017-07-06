@@ -3,6 +3,13 @@
 
 #include "stm32f10x.h"
 
+/*
+
+BLACK_RCT6	黑色的带USB口的小板
+RED_C8T6	红色的匿名小板
+
+*/
+
 extern int RX_PLOAD_WIDTH;	//用int型变量替换宏定义
 extern int TX_PLOAD_WIDTH;
 
@@ -55,14 +62,26 @@ extern int TX_PLOAD_WIDTH;
 
 #define RX_DR		0x40 //接收到数据中断标志位
 
+//************************************************************************************************
+#ifdef BLACK_RCT6
 
-#define NRF_CSN_HIGH()		GPIO_SetBits(GPIOC, GPIO_Pin_4)
-#define NRF_CSN_LOW()       GPIO_ResetBits(GPIOC, GPIO_Pin_4)		        //csn置低
+	#define NRF_CSN_HIGH()		GPIO_SetBits(GPIOC, GPIO_Pin_4)
+	#define NRF_CSN_LOW()       GPIO_ResetBits(GPIOC, GPIO_Pin_4)		        //csn置低
+	#define NRF_CE_HIGH()		GPIO_SetBits(GPIOA,GPIO_Pin_4)
+	#define NRF_CE_LOW()		GPIO_ResetBits(GPIOA,GPIO_Pin_4)			      //CE置低
+	#define NRF_Read_IRQ()		GPIO_ReadInputDataBit ( GPIOC, GPIO_Pin_5)  //中断引脚
 
-#define NRF_CE_HIGH()		GPIO_SetBits(GPIOA,GPIO_Pin_4)
-#define NRF_CE_LOW()		GPIO_ResetBits(GPIOA,GPIO_Pin_4)			      //CE置低
+#endif
 
-#define NRF_Read_IRQ()		GPIO_ReadInputDataBit ( GPIOC, GPIO_Pin_5)  //中断引脚
+#ifdef RED_C8T6
+
+	#define NRF_CSN_HIGH()		GPIO_SetBits(GPIOA, GPIO_Pin_4)
+	#define NRF_CSN_LOW()       GPIO_ResetBits(GPIOA, GPIO_Pin_4)		        //csn置低
+	#define NRF_CE_HIGH()		GPIO_SetBits(GPIOB,GPIO_Pin_0)
+	#define NRF_CE_LOW()		GPIO_ResetBits(GPIOB,GPIO_Pin_0)			      //CE置低
+	#define NRF_Read_IRQ()		GPIO_ReadInputDataBit ( GPIOB, GPIO_Pin_1)  //中断引脚
+
+#endif
 
 void SPI_NRF_Init(void);
 u8 SPI_NRF_RW(u8 dat);

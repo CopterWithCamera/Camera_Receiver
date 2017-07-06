@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>C8</TargetName>
+      <TargetName>RED_C8</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
@@ -136,8 +136,8 @@
             <DriverSelection>4099</DriverSelection>
           </Flash1>
           <bUseTDR>0</bUseTDR>
-          <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash2>Segger\JL2CM3.dll</Flash2>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -333,9 +333,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
+              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,RED_C8T6</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\usart;..\..\User\nrf</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\usart;..\..\User\nrf;..\..\User\SysTick;..\..\User\Led;..\..\User\Key</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -731,7 +731,7 @@
       </Groups>
     </Target>
     <Target>
-      <TargetName>RC</TargetName>
+      <TargetName>BLACK_RC</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
@@ -1057,7 +1057,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER, STM32F10X_HD</Define>
+              <Define>USE_STDPERIPH_DRIVER, STM32F10X_HD, BLACK_RCT6</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\usart;..\..\User\nrf;..\..\User\SysTick;..\..\User\Key;..\..\User\Led</IncludePath>
             </VariousControls>
@@ -1462,12 +1462,12 @@
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.1" condition="ARMv6_7_8-M Device">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.0.1"/>
         <targetInfos>
-          <targetInfo name="C8">
+          <targetInfo name="BLACK_RC">
             <c>
               <Optim>1</Optim>
             </c>
           </targetInfo>
-          <targetInfo name="RC">
+          <targetInfo name="RED_C8">
             <c>
               <Optim>1</Optim>
             </c>
