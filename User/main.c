@@ -72,11 +72,9 @@ int main(void)
 		if(status == RX_DR)
 		{
 			for(i=0;i<RX_PLOAD_WIDTH;i++)
-			{	
-				//printf("\r\n 从机端 接收到 主机端 发送的数据为：%d \r\n",);
-				
+			{
 				USART_SendData(USART1, rxbuf[i]);
-				while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);	
+				while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
 			}
 		}
 	}
