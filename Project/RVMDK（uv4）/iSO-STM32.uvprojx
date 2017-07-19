@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER,RED_C8T6</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\usart;..\..\User\nrf;..\..\User\SysTick;..\..\User\Led;..\..\User\Key</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS;..\..\User;..\..\Libraries\FWlib\inc;..\..\User\usart;..\..\User\nrf;..\..\User\SysTick</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -702,16 +702,6 @@
               <FileName>bsp_SysTick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\SysTick\bsp_SysTick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\Key\bsp_exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\Led\bsp_led.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1426,16 +1416,6 @@
               <FileName>bsp_SysTick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\SysTick\bsp_SysTick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\Key\bsp_exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\Led\bsp_led.c</FilePath>
             </File>
           </Files>
         </Group>
